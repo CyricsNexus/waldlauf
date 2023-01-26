@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class waldlauf {
 	
+	// BLABLABLABLABLA
+	
 
 	public static void main(String[] args) throws IOException {
 		/* Erster Index: Anzahl vorhandener Begegnungen
