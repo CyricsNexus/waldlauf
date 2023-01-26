@@ -49,13 +49,21 @@ public class waldlauf {
 
 		//Pennywise
 		begegnung[3][0] = "\"Magst Du auch Popcorn? Dann komm mit! Bei uns gibt es ganz viel davon!\" Der gruselige Clown gibt \nDir einen roten Ballon und zieht dich in den Gulli. (-1 Leben)" ;  
-		begegnung[3][1] = "\"Komm mit! Mit uns kannst Du fliiiieeeegeeeen!\" Und schon bist Du im Gulli (-1 Leben)";
+		begegnung[3][1] = "\"Komm mit! Mit uns kannst Du fliiiieeegeeeen!\" Und schon bist Du im Gulli (-1 Leben)";
 		begegnung[3][2] = "Du knüppelst auf Pennywise drauf. Du magst eh keine Ballons." ;
 		begegnung[3][3] = "1"; 
 		begegnung[3][4] = "1";
 		begegnung[3][5] = "0";
 		
-		
+
+		//Frantzen
+		begegnung[4][0] = "\"Boah, ey, endlich was zu essen!!\"" ;  
+		begegnung[4][1] = "\"IIIIIIIH!\" (-1 Leben)";
+		begegnung[4][2] = "\"Das gibt drei Klausurfragen mehr!! (-1 Leben) \"" ;
+		begegnung[4][3] = "0"; 
+		begegnung[4][4] = "1";
+		begegnung[4][5] = "1";
+
 		
 		// Generelle Variablen
 		int leben = 3;	// Anzahl der Leben
