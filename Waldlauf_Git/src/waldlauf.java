@@ -55,7 +55,15 @@ public class waldlauf {
 		begegnung[3][4] = "1";
 		begegnung[3][5] = "0";
 		
-		
+
+		//Frantzen
+		begegnung[3][0] = "\"Boah, ey, endlich was zu essen!!\"" ;  
+		begegnung[3][1] = "\"IIIIIIIH!\" (-1 Leben)";
+		begegnung[3][2] = "\"Das gibt drei Klausurfragen mehr!! (-1 Leben) \"" ;
+		begegnung[3][3] = "0"; 
+		begegnung[3][4] = "1";
+		begegnung[3][5] = "1";
+
 		
 		// Generelle Variablen
 		int leben = 3;	// Anzahl der Leben
