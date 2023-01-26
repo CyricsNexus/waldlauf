@@ -14,6 +14,7 @@ public class waldlauf {
 		* 4 Abzug Leben Streicheln
 		* 5 Abzug Leben Hauen
 		*ich war Da Bilal
+		*Nix Enterprise Accounts
 		*/
 		int anzahlBegegnungenmax = 4;
 		
