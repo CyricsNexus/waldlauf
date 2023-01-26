@@ -19,9 +19,9 @@ public class waldlauf {
 		*Nix Enterprise Accounts
 		* ich war nun auch mal hier :p
 		*/
-		int anzahlBegegnungenmax = 4;
+		int anzahlBegegnungenmax = 5;
 		
-		String begegnung[][] = new String[anzahlBegegnungenmax][6];
+		String begegnung[][] = new String[anzahlBegegnungenmax][7];
 
 		//Der Hulk
 		begegnung[0][0] = "Der Hulk freut sich über das Essen und zieht weiter."; 
@@ -29,7 +29,8 @@ public class waldlauf {
 		begegnung[0][2] = "Der HULK SMASH!(-1 Leben)." ;
 		begegnung[0][3] = "0"; 
 		begegnung[0][4] = "1";
-		begegnung[0][5] = "1";		
+		begegnung[0][5] = "1";	
+		begegnung[0][6] = "6";	
 
 		//Dr. Snuggles
 		begegnung[1][0] = "Dr. Snuggles bedankt sich höflich für das Essen und hüpft auf seinem Pogo-Schirm weiter." ;  
@@ -38,6 +39,7 @@ public class waldlauf {
 		begegnung[1][3] = "0"; 
 		begegnung[1][4] = "0";
 		begegnung[1][5] = "1";
+		begegnung[1][6] = "16";
 		
 		//Batman
 		begegnung[2][0] = "Batman freut sich sehr für das Essen. \"Ein gutgenährter Magen  ist die Grundvoraussetzung für einen \ngut genährten Geist. Vergiss das niemals, Robin!\" Bevor du etwas sagen kannst, ist er schon entfleucht." ;   
@@ -46,6 +48,7 @@ public class waldlauf {
 		begegnung[2][3] = "0"; 
 		begegnung[2][4] = "0";
 		begegnung[2][5] = "1";
+		begegnung[2][6] = "2";
 
 		//Pennywise
 		begegnung[3][0] = "\"Magst Du auch Popcorn? Dann komm mit! Bei uns gibt es ganz viel davon!\" Der gruselige Clown gibt \nDir einen roten Ballon und zieht dich in den Gulli. (-1 Leben)" ;  
@@ -54,6 +57,15 @@ public class waldlauf {
 		begegnung[3][3] = "1"; 
 		begegnung[3][4] = "1";
 		begegnung[3][5] = "0";
+		begegnung[3][6] = "2";
+		
+		begegnung[4][0] = "\"Magst Du auch Popcorn? Dann komm mit! Bei uns gibt es ganz viel davon!\" Der gruselige Clown gibt \nDir einen roten Ballon und zieht dich in den Gulli. (-1 Leben)" ;  
+		begegnung[4][1] = "\"Komm mit! Mit uns kannst Du fliiiieeeegeeeen!\" Und schon bist Du im Gulli (-1 Leben)";
+		begegnung[4][2] = "Du knüppelst auf Pennywise drauf. Du magst eh keine Ballons." ;
+		begegnung[4][3] = "1"; 
+		begegnung[4][4] = "1";
+		begegnung[4][5] = "0";
+		begegnung[4][6] = "3";
 		
 		
 		
