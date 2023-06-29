@@ -19,7 +19,7 @@ public class waldlauf {
 		*Nix Enterprise Accounts
 		* ich war nun auch mal hier :p
 		*/
-		int anzahlBegegnungenmax = 4;
+		int anzahlBegegnungenmax = 5;
 		
 		String begegnung[][] = new String[anzahlBegegnungenmax][6];
 
@@ -64,6 +64,14 @@ public class waldlauf {
 		begegnung[4][4] = "1";
 		begegnung[4][5] = "1";
 
+		//Das Lama
+		begegnung[5][0] = "Das Lama macht \"Bääää!\" *Mampf*" ;  
+		begegnung[5][1] = "Das Lama mach \"Bääääh?\"";
+		begegnung[5][2] = "Das Lama spuckt. (-1 Leben) \"" ;
+		begegnung[5][3] = "0"; 
+		begegnung[5][4] = "0";
+		begegnung[5][5] = "1";
+		
 		
 		// Generelle Variablen
 		int leben = 3;	// Anzahl der Leben
