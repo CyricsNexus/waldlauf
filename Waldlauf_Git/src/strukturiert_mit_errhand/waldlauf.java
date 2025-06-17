@@ -1,4 +1,4 @@
-package strukturiert_mit_errhand.copy;
+package strukturiert_mit_errhand;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Random;
