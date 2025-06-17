@@ -1,10 +1,34 @@
 /************************************************************************************
-*  Version 1.1
+*  Version 1.2
 *************************************************************************************
-* Aufgabe im Bereich der Imperativen Programmierung für Schulungszwecke
-* mit dem Strukturierten Programmparadigma
-* Das bedeutet:
-* - Ohne Objektorientierten Ansatz (Objektorientiertes Programmierparadigma),
-* - Ohne Methoden (Prozedurales Programmierparadigma),
-* sondern als simplen Ablauf.
+* DIE STORY:
+* Der Waldlauf basiert auf einem C64-Spiel. Bei diesem musste man durch einen dunklen
+* Wald gehen. 
+* Man hat 10 Begegnungen, die man nicht erkennen kann, weil es zu dunkel ist
+* und muss sich entscheiden, ob man diese streichelt, füttert oder tötet 
+* (dies wurde hier aus pädagogischen Gründen zu 'mit einem Stock kloppen' abgewandelt.)
+*
+* Hat man 3x falsch gewählt, hat man verloren. Hat man 10x richtig gewählt, 
+* ist man aus dem Wald draußen und hat gewonnen
+*
+***************************************************************************************
+*
+* DIE BEGEGNUNGEN:
+* Es ist purer Zufall, welche dieser Aktionen eine gute oder eine schlechte 
+* Entscheidung ist. Jede Begegnung wird zufällig ausgewählt. Und jede Begegnung muss
+* mindestens eine Option bei der Wahl zwischen streicheln, füttern oder kloppen haben,
+* durch die ein Leben abgezogen wird und eine, für die kein Leben abgezogen wird. 
+* Die Dritte obliegt dem Programmierer.
+*
+***************************************************************************************
+*
+* DIE PAKETE:
+* Im Gegensatz zum regulären Gebrauch, wurden die Pakete "missbraucht", um die 
+* unterschiedlichen Programmierparadigmen für Schulungszwecke zu veranschaulichen.
+* Die Pakete dienen also nicht als Module, sondern besitzen jeweils ein eigenes Programm.
+*
+* - strukturiert: Das strukturierte Programmierparadigma nur mit Verzweigung und Schleifen
+* - prozedural: Die Erweiterung durch Methoden
+* - ooe: Der Waldlauf als objektorientierter Ansatz, um den Array zu ersetzen
+* - factory method pattern: Wie ein Design Pattern alles vereinfachen kann
 *************************************************************************************
