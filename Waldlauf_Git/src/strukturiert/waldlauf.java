@@ -1,28 +1,44 @@
+package strukturiert;
 import java.io.IOException;
+import java.util.Random;
 import java.util.Scanner;
 
+/*******************************************************
+ * VARIABLEN
+ *  begegnung : String[anzahlBegegnungenmax][6]				| Die Begegnungen, welche man im dunklen Wald hat
+ *  anzahlBegegnungenmax : int								| Wieviele Begegnungen in diesem Spiel vorhanden sind
+ *  leben : int	= 3											| Anzahl der Leben zu Beginn
+ *  runde : int 											| die aktuelle Runde
+ *  maxRunde : int = 10										| die Anzahl der zu bewältigen Runden, bis das Spiel gewonnen ist
+ ******************************************************/
 public class waldlauf {
-	
-	// BLABLABLABLABLA
-	
 
-	public static void main(String[] args) throws IOException {
-		/* Erster Index: Anzahl vorhandener Begegnungen
-		* Zweiter Index: 
-		* 0 Ausgabe Füttern
-		* 1 Ausgabe Streicheln
-		* 2 Ausgabe Hauen
-		* 3 Abzug Leben Füttern
-		* 4 Abzug Leben Streicheln
-		* 5 Abzug Leben Hauen
-		*ich war Da Bilal
-		*Nix Enterprise Accounts
-		* ich war nun auch mal hier :p
-		*/
-		int anzahlBegegnungenmax = 5;
+	public static void main(String[] args){
+		/******************************************************************************************
+		* DEKLARATION UND INITIALISIERUNG VON VARIABLEN
+		* /***************************************************************************************/
+		Scanner sc = new Scanner(System.in);
+		Random random = new Random();									// Instanziierung Zufallszahl
+		int leben = 3;													// Anzahl der Leben
+		int runde = 1; 													// die aktuelle Runde
+		int maxRunde = 10;												// zu durchlaufende Runden
+		int anzahlBegegnungenmax = 6;									// Anzahl der existierenden Begegnungen
+		String begegnung[][] = new String[anzahlBegegnungenmax][6];		// Array mit Begegnungen
 		
-		String begegnung[][] = new String[anzahlBegegnungenmax][6];
-
+		/******************************************************************************************
+		* ERSTELLUNG DER BEGEGNUNGEN
+		* ****************************************************************************************
+		* ERLÄUTERUNG ZUM INDEX
+		* Erster Index: Anzahl vorhandener Begegnungen
+		* Zweiter Index: 
+		* 	0: Ausgabe Füttern
+		* 	1: Ausgabe Streicheln
+		* 	2: Ausgabe Hauen
+		* 	3: Abzug Leben Füttern
+		* 	4: Abzug Leben Streicheln
+		* 	5: Abzug Leben Hauen
+		*/
+		
 		//Der Hulk
 		begegnung[0][0] = "Der Hulk freut sich über das Essen und zieht weiter."; 
 		begegnung[0][1] = "Der Hulk erwiedert deine Zärtlichkeit und drückt dich mal ganz dolle - ohoh! (-1 Leben)." ;
@@ -70,52 +86,60 @@ public class waldlauf {
 		begegnung[5][2] = "Das Lama spuckt. (-1 Leben) \"" ;
 		begegnung[5][3] = "0"; 
 		begegnung[5][4] = "0";
-		begegnung[5][5] = "1";
+		begegnung[5][5] = "1";	
 		
 		
-		// Generelle Variablen
-		int leben = 3;	// Anzahl der Leben
-		int runde = 1; // zu durchlaufende Runden
-		int maxRunde = 5;
+		/******************************************************************************************
+		* SPIELBEGINN
+		* /***************************************************************************************/
 
-
-		int zufallszahl;
-		//System.out.print(zufallszahl);
-		
-		//Eingabe Scanner und eingabe zur Auswertung der Aktion 
-		// sowie des Arrays Nachricht (eingabe-1) & Leben(eingabe+2)
-		Scanner sc = new Scanner(System.in);
-		byte eingabe;
-
+		// Intro
 		System.out.println("Du bist in einem Wald und hast einen Wanderstab sowie einen Rucksack voll mit Eier-Tomaten-Gurken-Sandwiches. \nEs ist sehr dunkel und du kannst kaum die Hand vor Deinen Augen sehen, als Dir plötzlich etwas begegnet. \nDu hast keine Ahnung, wer oder was es ist. Möchtest du es:\n\n1) Füttern?\n2) Streicheln?\n3) Mit dem Stock hauen?");
 		
+		// Schleife, welche so lange durchlaufen wird, bis keine Leben oder maxRunde geschafft 
 		do {
 
-			zufallszahl = (int)(Math.random()*anzahlBegegnungenmax);
-
-			if (runde != 1) {		// Wenn es nicht die 1. Runde ist, braucht es einen anderen Satz
+			int zufallszahl = random.nextInt(anzahlBegegnungenmax);		// Zufallszahl zwischen 0 und anzahlBegegnungenmax-1
+																		// um den 1. Index für Zufallsbegegnung auszuwählen
+			// Text für 2. bis letzte Runde
+			if (runde != 1) {		
 				System.out.println("\nDu setzt Deinen Weg fort. Aber - was ist das? Eine weitere Begegnung. Du entschließt sich die Begegnung: "
 						+ "\n1) zu füttern?\n2) zu streicheln?\n3) mit dem Stock zu hauen?");
 			}
 			
-			eingabe = sc.nextByte();		// Eingabe 1, 2, 3
-			for(int i=1; i<10;i++)			//"Screen durch 10 Zeilenumbrüche leeren"
+			byte eingabe = sc.nextByte();		// BenutzerEingabe 1, 2 oder 3
+			for(int i=1; i<10;i++)				// Screen durch 10 Zeilenumbrüche "leeren"
 				System.out.println("\n");
 			
-			System.out.println(begegnung[zufallszahl][eingabe-1]);					// Textausgabe
+			// Es soll von der Begegnung der Benutzereingabe-1 als 2. Index ausgegeben werden
+			// begegnung[zufallszahl][eingabe-1]
+			// Beispiel: Zufallszahl 0 = Hulk; Eingabe Hauen = 3
+			//  = begegnung[0][3-1] = begegnung[0][2] = Hulk wird gehauen
+			System.out.println(begegnung[zufallszahl][eingabe-1]);					// Ausgabe des Arrayswerts
+			
+			// Es wird der Wert abgezogen, der bei der Begegnung für die Entscheidung steht
+			// Bei Hulk begegnung[0][3] = "0", begegnung[0][4] = "0", begegnung[0][5] = "1"
+			// Der Index wird durch die Eingabe des Benutzers ermittelt, indem Index = Eingabe +2 .
+			// Hätte der Benutzer eine 1 eingegeben, wäre der Index 1+2 = 3. 
+			// Der Wert bei begegnung[0][3] = 0, und es würde leben-0 gerechnet werden, also nichts abgezogen werden.
+			// Da der Benutzer aber eine 3 eingegeben hat, ist der Index 3+2 = 5.
+			// begegnung[0][5] = 1, dadurch wird leben - 1 gerechnet und 1 Leben wird abgezogen.
 			leben = leben - Integer.parseInt(begegnung[zufallszahl][eingabe+2]); 	// Leben abziehen
-			// System.out.println(leben);	
 			
 			runde++;					// Eine Runde weiter
 			
 		}
 		while (runde <= maxRunde && leben > 0);
 		
+		
+		// ERGEBNIS - WHILE-SCHLEIFE WURDE UNTERBROCHEN
 		if (leben == 0)
 			System.out.println("\n\nDu hast es leider nicht aus dem Wald geschafft. Viel Glück beim nächsten Mal.");
 		else
 			System.out.println("\n\nDer Wald lichtet sich. \nFroh am leben zu sein, setzt Du Deinen Weg fort.");
 		
+		// HEAP leeren
+		random = null;
 		sc.close();
 	}
 
