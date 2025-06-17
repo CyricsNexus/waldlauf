@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
-
+ 
 /*******************************************************
  * VARIABLEN
  *  begegnung : String[anzahlBegegnungenmax][6]				| Die Begegnungen, welche man im dunklen Wald hat

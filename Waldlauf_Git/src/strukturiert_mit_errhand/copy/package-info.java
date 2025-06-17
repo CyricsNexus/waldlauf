@@ -7,4 +7,4 @@
  * @author C. Frantzen
  * @since 1.0
  **/
-package strukturiert_mit_errhand.copy;
+package strukturiert_mit_errhand.copy; 
