@@ -64,10 +64,11 @@ public class waldlauf {
 		// Initiale Werte, die den Spielablauf bedingen
 		int leben = 3;													// Anzahl der Leben
 		int maxRunde = 10;												// zu durchlaufende Runden
-		int anzahlBegegnungenmax = 6;									// Anzahl der existierenden Begegnungen
-		
+
 		// Weitere Variablen / Objekte
 		Scanner sc = new Scanner(System.in);
+		int anzahlBegegnungenmax = 7;									// Anzahl der existierenden Begegnungen
+
 		String begegnung[][] = initBegegnung(anzahlBegegnungenmax);		// Begegnungen erstellen
 		
 		/**************************************
@@ -159,6 +160,13 @@ public class waldlauf {
 				"Das Lama macht \"Bääää!\" *Mampf*", 
 				"Das Lama mach \"Bääääh?\"", 
 				"Das Lama spuckt. (-1 Leben) \"", 
+				"0", "0", "1");
+		
+		//Der Baum
+		begegnung = erstelleBegegnung(5, begegnung, 
+				"Der Baum ist unbeeindruckt vom Essen.", 
+				"Der Baum streichelt nicht zurück.", 
+				"Der Baum kippt um. Bumm. (-1 Leben) \"", 
 				"0", "0", "1");
 		
 		return begegnung;
