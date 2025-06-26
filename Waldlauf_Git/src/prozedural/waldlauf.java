@@ -67,7 +67,7 @@ public class waldlauf {
 
 		// Weitere Variablen / Objekte
 		Scanner sc = new Scanner(System.in);
-		int anzahlBegegnungenmax = 7;									// Anzahl der existierenden Begegnungen
+		int anzahlBegegnungenmax = 8;									// Anzahl der existierenden Begegnungen
 
 		String begegnung[][] = initBegegnung(anzahlBegegnungenmax);		// Begegnungen erstellen
 		
@@ -165,10 +165,16 @@ public class waldlauf {
 		//Der Baum
 		begegnung = erstelleBegegnung(5, begegnung, 
 				"Der Baum ist unbeeindruckt vom Essen.", 
-				"Der Baum streichelt nicht zurück.", 
-				"Der Baum kippt um. Bumm. (-1 Leben) \"", 
+				"Der Baum streichelt nicht zurück.", 				"Der Baum kippt um. Bumm. (-1 Leben)", 
 				"0", "0", "1");
 		
+		//T-Rex
+		begegnung = erstelleBegegnung(5, begegnung, 
+				"Der T-Rex guckt hungrig. Du bist das Essen. (-1 Leben)", 
+				"Der T-Rex mag es, gestreichelt zu werden. Dann verschlingt er Dich. (-1 Leben)", 
+				"Der T-Rex rennt weinend weg.", 
+				"1", "1", "0");
+
 		return begegnung;
 	}
 	
