@@ -40,7 +40,7 @@ import java.util.Scanner;
  * 							| gibt eine 1 zurück, wenn Leben abgezogen werden soll oder 0, wenn kein Leben abgezogen werden soll
  * 
  * - eingabeBenutzer() : byte 
- * 							| gibt zurück, ob der Spieler 1) Füttern, 2) Streicheln oder 3) Kloppen eingegeben hat und fängt fehlerhafte Eingaben ab
+ *  							| gibt zurück, ob der Spieler 1) Füttern, 2) Streicheln oder 3) Kloppen eingegeben hat und fängt fehlerhafte Eingaben ab
  *  
  *   METHODEN FÜR NACHRTICHTEN-AUSGABEN
 
@@ -55,36 +55,55 @@ import java.util.Scanner;
 
 public class waldlauf {
 
-	public static void main(String[] args) throws IOException {
+	// Hauptmethode mit Rundenschleife
+	public static void main(String[] args) throws IOException{
 
+		/**************************************
+		* VARIABLEN
+		**************************************/
+		// Initiale Werte, die den Spielablauf bedingen
 		int leben = 3;													// Anzahl der Leben
 		int maxRunde = 10;												// zu durchlaufende Runden
+
+		// Weitere Variablen / Objekte
+		Scanner sc = new Scanner(System.in);
 		int anzahlBegegnungenmax = 7;									// Anzahl der existierenden Begegnungen
+
 		String begegnung[][] = initBegegnung(anzahlBegegnungenmax);		// Begegnungen erstellen
 		
+		/**************************************
+		* SPIELABLAUF
+		**************************************/
 		ausgebenIntro();													// Nachricht zum Spielbeginn
 		
-		// Schleife, welche so lange durchlaufen wird, bis keine Leben oder maxRunde geschafft 
+		// Schleife, welche so lange durchlaufen wird, bis Leben = 0 oder aktuelle Runde = maxRunde  
 		for(int runde=1; runde <= maxRunde; runde++) {
-			leben -= durchlaufRunde(anzahlBegegnungenmax, begegnung, runde == 1);		// Leben abziehen, falls Entscheidung falsch
-			if(leben == 0) break;													// Vorzeitiger Abbruch, falls kein Leben mehr vorhanden
+			leben -= durchlaufRunde(anzahlBegegnungenmax, begegnung, runde == 1, sc);		// Rundenaufruf + Leben abziehen, falls Entscheidung falsch
+			if(leben == 0) break;														// Vorzeitiger Abbruch, falls kein Leben mehr vorhanden
 		}
 		
 		ausgebenNachrichtEnde(leben); 				// Ausgabe Nachricht, ob Spieler gewonnen oder verloren hat
+		
+		// Aufräumen
+		sc.close();
+		sc = null;
+
 	}
 	
-	private static int durchlaufRunde(int anzahlBegegnungenmax, String[][] begegnung, boolean ersteRunde ) {
+	// Einzelner Rundenablauf 
+	private static int durchlaufRunde(int anzahlBegegnungenmax, String[][] begegnung, boolean ersteRunde, Scanner sc ) throws IOException {
 
 		Random random = new Random();									// Instanziierung Zufallszahl
 		int zufallszahl = random.nextInt(anzahlBegegnungenmax);			// Zufällige Auswahl der Begegnung
 		if (!ersteRunde) ausgebenFolgebegegnung();						// Anfangstext für 2. bis letzte Runde
-		byte eingabe = eingabeBenutzer();									// Handlung Benutzer + Sicherstellung, dass Eingabe vom Benutzer 1, 2 oder 3
+		byte eingabe = eingabeBenutzer(sc);									// Handlung Benutzer + Sicherstellung, dass Eingabe vom Benutzer 1, 2 oder 3
 		leerenKonsole();													// Bildschirm vor Auswirkung leeren
 		ausgebenNachrichtEntscheidung(begegnung, zufallszahl, eingabe);
 		random = null;
 		return auswertungLebensabzug(begegnung, zufallszahl, eingabe); 	// Leben abziehen
 	}
 	
+	// Daten für den Begegnungsarray
 	private static String[][] initBegegnung(int anzahlBegegnungenmax){
 		
 		String begegnung[][] = new String[anzahlBegegnungenmax][6];		// Array mit Begegnungen
@@ -153,6 +172,7 @@ public class waldlauf {
 		return begegnung;
 	}
 	
+	// Füllt den Array mit den Daten - wird von initBegegnung bei jedem Tupel aufgerufen
 	private static String [][] erstelleBegegnung(int index, String[][] begegnung, String fuetternReaktion, String streichelnReaktion, String kloppenReation, String punktAbzugFuettern, String punktAbzugStreicheln, String punktAbzugKloppen) {
 		begegnung[index][0] = fuetternReaktion; 
 		begegnung[index][1] = streichelnReaktion;
@@ -163,20 +183,24 @@ public class waldlauf {
 		return begegnung;
 	}
 	
+	// Gibt den Wert (0 oder 1) zurück, der das Leben abzieht
 	private static int auswertungLebensabzug(String[][] begegnung, int zufallszahl,  byte eingabe) {
 		return  Integer.parseInt(begegnung[zufallszahl][eingabe+2]);
 	}
 	
-	private static byte eingabeBenutzer() {
+	// Eingabe des Benutzers inkl. Fehlerbehandlung, wenn keine 1, 2 oder 3 eingegeben wurde
+	// Methode wird nur bei gültigen Wert verlassen
+	private static byte eingabeBenutzer(Scanner sc) throws IOException {
+
+		byte eingabe = 0;
 		boolean eingabeGueltig = false;									// für Errorhandling, dass Benutzer 1, 2 oder 3 eingibt
-		Scanner sc = new Scanner(System.in);
+
 		// Eingabe des Benutzers + Errorhandling
 		while(!eingabeGueltig) {					// Solange keine gültige Eingabe vorhanden ist, soll die Eingabe wiederholt werden
 			try {									// Überprüfe, ob Fehler gemacht wurde
-				byte eingabe = sc.nextByte();		// BenutzerEingabe 1, 2 oder 3
+				eingabe = sc.nextByte();		// BenutzerEingabe 1, 2 oder 3
 				if (eingabe >=1 && eingabe <=3) {	// Falls Eingabe=Byte, dann überprüfen, ob Wert zwischen 1-3
-					sc.close();
-					return eingabe;
+					eingabeGueltig = true;
 				} else {							// 		Wenn Wert nicht zwischen 1-3 Fehlermeldung und Wiederholung
 					ausgebenNachrichtEingabefehler();
 				}					
@@ -185,27 +209,31 @@ public class waldlauf {
 				sc.next();
 			}
 		}
-		return 0;
-
-		
+		return eingabe;
 
 	}
 	
-	// Methoden mit Textausgaben Konsole
+	/*******************************************************
+	 * METHODEN, DIE NUR NACHRICHTEN AUSGEBEN
+	********************************************************/
 
+	// Ausgabe Spielbeginn
 	private static void ausgebenIntro() {
 		System.out.println("Du bist in einem Wald und hast einen Wanderstab sowie einen Rucksack voll mit Eier-Tomaten-Gurken-Sandwiches. \nEs ist sehr dunkel und du kannst kaum die Hand vor Deinen Augen sehen, als Dir plötzlich etwas begegnet. \nDu hast keine Ahnung, wer oder was es ist. Möchtest du es:\n\n1) Füttern?\n2) Streicheln?\n3) Mit dem Stock hauen?");
 	}
 	
+	// Ausgabe jede neue Runde
 	private static void ausgebenFolgebegegnung() {
 		System.out.println("\nDu setzt Deinen Weg fort. Aber - was ist das? Eine weitere Begegnung. Du entschließt sich die Begegnung: "
 				+ "\n1) zu füttern?\n2) zu streicheln?\n3) mit dem Stock zu hauen?");
 	}
 	
+	// Ausgabe Auswirkung nach Benutzereingabe
 	private static void ausgebenNachrichtEntscheidung(String[][] begegnung, int zufallszahl,  byte eingabe) {
 		System.out.println(begegnung[zufallszahl][eingabe-1]);					// Ausgabe des Arrayswerts
 	}
 
+	// Ausgabe Spielende ob gewonnen oder verloren
 	private static void ausgebenNachrichtEnde(int leben) {
 		if (leben == 0)
 			System.out.println("\n\nDu hast es leider nicht aus dem Wald geschafft. Viel Glück beim nächsten Mal.");
@@ -213,11 +241,13 @@ public class waldlauf {
 			System.out.println("\n\nDer Wald lichtet sich. \nFroh am leben zu sein, setzt Du Deinen Weg fort.");
 	}
 	
+	// Ausgabe nach fehlerhafter Eingabe
 	private static void ausgebenNachrichtEingabefehler() {
 		System.out.print("\nEingabe ungültig. Möchtest Du die Begegnung: \n"
 				+ "1) füttern?\n2) streicheln?\n3) mit dem Stock hauen?");
 	}
 	
+	// Macht Zeilenumbrüche, dass es nach Neuer Seite aussieht
 	private static void leerenKonsole() {
 		for(int i=1; i<10;i++)				// Screen durch 10 Zeilenumbrüche "leeren"
 			System.out.println("\n");
