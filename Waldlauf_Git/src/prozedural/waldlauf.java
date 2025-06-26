@@ -165,8 +165,13 @@ public class waldlauf {
 		//Der Baum
 		begegnung = erstelleBegegnung(5, begegnung, 
 				"Der Baum ist unbeeindruckt vom Essen.", 
+<<<<<<< cfrantzen_branch
 				"Der Baum streichelt nicht zurück.", 
 				"Der Baum kippt um. Bumm. (-1 Leben)", 
+=======
+				"Der Baum streichelt nicht zurück.", 
+				"Der Baum kippt um. Bumm. (-1 Leben)", 
+>>>>>>> main
 				"0", "0", "1");
 
 		//T-Rex
@@ -176,6 +181,13 @@ public class waldlauf {
 				"Der T-Rex rennt weinend weg.", 
 				"1", "1", "0");
 		
+		//T-Rex
+		begegnung = erstelleBegegnung(5, begegnung, 
+				"Der T-Rex guckt hungrig. Du bist das Essen. (-1 Leben)", 
+				"Der T-Rex mag es, gestreichelt zu werden. Dann verschlingt er Dich. (-1 Leben)", 
+				"Der T-Rex rennt weinend weg.", 
+				"1", "1", "0");
+
 		return begegnung;
 	}
 	
