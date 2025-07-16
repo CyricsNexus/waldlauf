@@ -1,6 +1,6 @@
 /**
  * ERLÄUTERUNG
- * Das selbe wie package strukturiert, aber mit Error Handling
+ * Dasselbe wie package strukturiert, aber mit Error Handling
  **/
 /**
  * @version 1.0
