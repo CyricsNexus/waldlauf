@@ -5,7 +5,7 @@
  * Das strukturierte Programmierparadigma kann Verzweigungen und Schleifen haben.
  **/ 
 /**
- * @version 1.0
+ * @version 2.0
  * @author C. Frantzen
  * @since 1.0
  **/

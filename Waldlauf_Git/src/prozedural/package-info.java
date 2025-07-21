@@ -22,8 +22,8 @@
  *         - bei Fehlern editiert/entfernt werden können, ohne dass das Hauptprogramm zu betreffen
  */
 /**
- * @version 1.0
+ * @version 2.0
  * @author C. Frantzen
- * @since 1.0
+ * @since 2.0
  **/
 package prozedural;
