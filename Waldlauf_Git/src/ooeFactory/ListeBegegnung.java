@@ -39,7 +39,7 @@ public class ListeBegegnung  extends FactoryListeBegegnung{
 			String reaktionSteicheln, 
 			String reaktionFuettern, 
 			String reaktionHauen) throws Exception {
-		listeBegegnung.add(createBegegnung(begegnungsart, begegnungsname, reaktionHauen, reaktionFuettern, reaktionHauen));
+		listeBegegnung.add(createBegegnung(begegnungsart, begegnungsname, reaktionSteicheln, reaktionFuettern, reaktionHauen));
 	}
 	
 	// Gibt die Reaktion der Begegnung zurück
