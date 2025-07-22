@@ -69,7 +69,7 @@ public class Main {
 	* Die Fehlermeldung würde direkt hier aufploppen, wo die Ursache ist und nicht später bei der Verarbeitung.
 	*********************************************************************************/
 	
-	public static ListeBegegnung addBegegnungenImSpiel() {
+	private static ListeBegegnung addBegegnungenImSpiel() {
 		ListeBegegnung listeBegegnung = new ListeBegegnung();
 		
 		listeBegegnung.addBegegnung("Hulk", 
