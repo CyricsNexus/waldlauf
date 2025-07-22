@@ -31,4 +31,5 @@
 * - prozedural: Die Erweiterung durch Methoden
 * - ooe: Der Waldlauf als objektorientierter Ansatz, um den Array zu ersetzen
 * - factory method pattern: Wie ein Design Pattern alles vereinfachen kann
+* - deklarativ: ein funktionales Interface + forEach-Schleifen statt Iteration
 *************************************************************************************
