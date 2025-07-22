@@ -1,14 +1,14 @@
 package ooeFactory.begegnungen;
 
-public class Begegnung {
+public abstract class Begegnung {
 
 	/*************************************************************************
-	 * Eine einzelne Begegnung mit den Reaktionen fÃ¼r streicheln, fÃ¼ttern und hauen 
+	 * Eine einzelne Begegnung mit den Reaktionen für streicheln, füttern und hauen 
 	 *   inkl boolean ob Lebensabzug bei der aktuellen Auswahl erfolgt 
 	 * ----------------------------------------------------------------------
 	 * 
 	 * Im Gegensatz zum OOE wurden die Lebensabzug-Eigenschaften auf protected gesetzt,
-	 * damit die Kindsklassen diese Werte verÃ¤ndern dÃ¼rfen. Diese wurden auch aus dem Konstruktor 
+	 * damit die Kindsklassen diese Werte verÃ¤ndern dürfen. Diese wurden auch aus dem Konstruktor 
 	 * entfernt, da sie beim Erstellen der konkreten Klasse bereits gesetzt werden
 	 */
 	
@@ -16,11 +16,11 @@ public class Begegnung {
 	@SuppressWarnings("unused")
 	private String begegnungsBezeichnung = "";			// Name der Begegnung	
 	
-	private String reaktionSteicheln = "";				// Reaktion fÃ¼rs Streicheln
+	private String reaktionSteicheln = "";				// Reaktion fürs Streicheln
 	protected boolean streichelnLebensabzug = false;		// gibt Stricheln Lebensabzug?
-	private String reaktionFuettern = "";				// Reaktion fÃ¼rs Streicheln
-	protected boolean fuetternLebensabzug = false;			// gibt FÃ¼ttern Lebensabzug?
-	private String reaktionHauen = "";					// Reaktion fÃ¼rs Streicheln
+	private String reaktionFuettern = "";				// Reaktion fürs Streicheln
+	protected boolean fuetternLebensabzug = false;			// gibt Füttern Lebensabzug?
+	private String reaktionHauen = "";					// Reaktion fürs Streicheln
 	protected boolean hauenLebensabzug = false;			// gibt Hauen Lebensabzug?
 	
 
@@ -46,7 +46,7 @@ public class Begegnung {
 		return reaktionHauen;
 	}
 
-	// Boolsche Getter fÃ¼r Lebensabzug
+	// Boolsche Getter für Lebensabzug
 	public boolean isStreichelnLebensabzug() {
 		return streichelnLebensabzug;
 	}
