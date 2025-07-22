@@ -3,29 +3,22 @@ package deklarativ;
 public class Begegnung {
 
 	/*************************************************************************
-	 * Eine einzelne Begegnung mit den Reaktionen für streicheln, füttern und hauen 
+	 * Eine einzelne Begegnung mit den Reaktionen f�r streicheln, f�ttern und hauen 
 	 *   inkl boolean ob Lebensabzug bei der aktuellen Auswahl erfolgt 
 	 * ----------------------------------------------------------------------
 	 * 
-	 * Auf Setter wird hier verzichtet, da alle Werte per Konstruktor festgelegt werden.
-	 * 
-	 * zu begegnungsBezeichnung : String |  wird im Spiel nicht genutzt, ggf. für Abfragen des Entwicklers interessant
-	 * Es kann sein, dass der Entwickler diese Variable zur Kontrolle haben möchte, um festzustellen, ob die Reaktion 
-	 * zu der Begegnung passt. Die Anpassung im Konstruktor und das Einholen der Daten würde maßgebliche Wartungsarbeit 
-	 * in der Main-Klasse und der Datenquelle bedeuten. Daher wird die Eigenschaft generell vorsichthalber gespeichert, 
-	 * so dass die Begegnung durch einen simplen Getter in dieser Klasse später hinzugefügt werden kann. 
-	 * Hier gilt die Voraussicht für CleanCode-Prinzipien: Hinzufügen ist erwünscht, Änderungen des vorhandenen Codes nicht.
+	 * Siehe Erl�uterungen aus dem strukturierten PPs
 	 */
 	
 	
 	@SuppressWarnings("unused")
 	private String begegnungsBezeichnung = "";			// Name der Begegnung	
 	
-	private String reaktionSteicheln = "";				// Reaktion fürs Streicheln
+	private String reaktionSteicheln = "";				// Reaktion f�rs Streicheln
 	private boolean streichelnLebensabzug = false;		// gibt Stricheln Lebensabzug?
-	private String reaktionFuettern = "";				// Reaktion fürs Streicheln
-	private boolean fuetternLebensabzug = false;			// gibt Füttern Lebensabzug?
-	private String reaktionHauen = "";					// Reaktion fürs Streicheln
+	private String reaktionFuettern = "";				// Reaktion f�rs Streicheln
+	private boolean fuetternLebensabzug = false;		// gibt F�ttern Lebensabzug?
+	private String reaktionHauen = "";					// Reaktion f�rs Streicheln
 	private boolean hauenLebensabzug = false;			// gibt Hauen Lebensabzug?
 	
 
@@ -44,17 +37,15 @@ public class Begegnung {
 	}
 	
 	// Ausgabe der Reaktionen
-	public void getReaktion(int benutzereingabe) {
+	public String getReaktion(int benutzereingabe) {
 		switch(benutzereingabe) {
-		case 1: System.out.println(reaktionSteicheln);
-		break;
-		case 2: System.out.println(reaktionFuettern);
-		break;
-		default: System.out.println(reaktionHauen);		
+		case 1: return reaktionSteicheln;
+		case 2: return reaktionFuettern;
+		default: return reaktionHauen;		
 		}
 	}
 
-	// Boolsche Getter für Lebensabzug
+	// Boolsche Getter f�r Lebensabzug
 	public boolean isLebensabzug(int benutzereingabe) {
 		switch(benutzereingabe) {
 		case 1: return streichelnLebensabzug;

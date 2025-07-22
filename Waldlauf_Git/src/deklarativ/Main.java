@@ -1,7 +1,7 @@
 package deklarativ;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Random;
@@ -10,101 +10,96 @@ import java.util.Scanner;
 public class Main {
 
 	/*********************************************************************************
-	 *  Ein Unterschied zu dem prozeduralen Beispiel ist, dass ich die Main-Methode nicht ganz so entschlackt habe.
-	 *  	WÃ¤hrend ich im Prozeduralen Programmierp. zeigen wollte, wie weit man Prozeduren verschachteln kann, ist mir hier
-	 *  die generelle Lesbarkeit wichtiger. Hier wurden nur Prozeduren in der Main-Methode erstellt, 
-	 *  die Fehler abfangen sollen oder die Daten bereitstellen. 
+	 *  Hier wurde ein funktionales Interface (Ausgabe) hinzugefügt, um den Vergleich zu einer
+	 *  Prozedur zu machen (ob das hier schlanker/verständlicher ist, als eine simple Prozedur 
+	 *  mit Parametern, sei in diesem Beispiel dahingestellt)
 	 *  
-	 *  Viele Methoden sind hier nicht mehr aufgefÃ¼hrt, weil diese Teil des Spiels (Klasse Spiel) sind und nicht Teil des Ablaufs
+	 *  Der deklarative Ansatz ist vor allem erneut in den Methodenaufrufen zu sehen sowie in der
+	 *  forEach-Schleife, dem Befüllen des Arrays 
 	 *  
-	 *  Man hÃ¤tte hier noch SicherheitsmaÃŸnahmen zulasten des Speichers und der Verarbeitungszeit einbauen kÃ¶nnen, wie z.B. 
-	 *  ein Switch-Case nach der Entscheidung, dass die Benutzerauswahl einen String "streicheln", "fuettern" oder "hauen" Ã¼bergibt 
-	 *  der dann von der Klasse ListeBegegnung ausgewertet wird, statt die direkte Eingabe 1, 2 oder 3, um Programmierfehler zu vermeiden.
-	 *  Hier gibt es kein konkretes "richtig" oder "falsch". Da dieses in einem Zug verarbeitet werden konnte und nicht davon
-	 *  auszugehen ist, dass dieses zukÃ¼nftig erweitert werden soll, wurde auf die SicherheitsmaÃŸnahme zugunsten Ressourcen verzichtet
 	 * ******************************************************************************/
+
+	@FunctionalInterface									// Dieses wurde erstellt, um die Ausgabe zu übernehmen
+															// und vorher Leerzeilen einzufügen
+	interface Ausgabe {
+	    public void ausgeben(int zeilen, String nachricht);
+	}
+
 	
 	public static void main(String[] args) throws IOException {
 		//----------------------------------------
-		// INIT
+		// INITIALISIERUNG
 		
-		Scanner sc = new Scanner(System.in);							// Instanziierung Benutzereingabe
-		
+		// Was das funktionale Interface mit den Parametern machen soll
+        Ausgabe info = (zeilen, nachricht) -> {
+        	for(int i = 0; i < zeilen; i++) System.out.print("\n");		// Anzahl der Leerzeilen vor der Nachricht
+            System.out.println(nachricht); 								// Ausgabe der Nachricht
+        }; 
+
+		Scanner sc = new Scanner(System.in);							
+				
 		int leben = 3;
 		int anzahlRunden = 10;
 		
-		Spiel meinSpiel = new Spiel(leben, anzahlRunden); 			// Spiel mit 3 Leben und 10 Runden
-		List<Begegnung> listeDB = BegegnungsDB.getBegegnungsDB();		// Simuliert das Erhalten einer Liste aus einer Datenbank
+		Spiel meinSpiel = new Spiel(leben, anzahlRunden); 				// Spiel mit 3 Leben und 10 Runden
+		final List<Begegnung> listeDB = BegegnungsDB.getBegegnungsDB();	// Simuliert das Erhalten einer Liste aus einer Datenbank
+		
+		Begegnung[] begegnungen = new Begegnung[10];
+		Arrays.setAll(begegnungen, v -> getZufallsBegegnung(listeDB));	// Füllt den Array mit Zufallsbegegnungen
+		
 
-/*		
-		List<Begegnung> listeBegegnungen = 							// Hier wÃ¤re ein Beispiel, wie man den Array komplett in eine ArrayList
-				listeDB.stream()										// Ã¼bertragen kÃ¶nnte. Allerdings soll hier der Vorteil des Arrays
-				.collect(Collectors.toList());						// genutzt werden: Es existieren exakt 10 Runden. Nicht mehr und nicht weniger
-*/
-		
-		List<Begegnung> begegnungen = new ArrayList<Begegnung>();		// FÃ¼gt jeder Runde eine Begegnung hinzu
-		for(int i = 0; i < meinSpiel.getAnzahlRunden(); i++) {		// leider lÃ¤sst sich nicht jede Schleife deklarativ abkÃ¼rzen
-			begegnungen.add(getZufallsBegegnung(listeDB));
-		}
-		
 		//----------------------------------------		
 	    // SPIELABLAUF
-		
-		Spiel.ausgebenIntro();										// Spielintro
-		
-		// Schleife, welche so lange durchlaufen wird, bis kein Leben vorhanden ist oder die letzte Runde geschafft wurde  
+
+		info.ausgeben(1,"Du bist in einem Wald und hast einen Wanderstab sowie einen Rucksack voll "		//Ausgabe Intro
+				+ "mit Eier-Tomaten-Gurken-Sandwiches. \nEs ist sehr dunkel und du kannst kaum die "
+				+ "Hand vor Deinen Augen sehen.");
+		  
 		for(Begegnung einzelneBegegnung : begegnungen) {
-			Spiel.ausgebenFolgebegegnung();																// Nachteil bei foreach: Rundenindex mÃ¼sste als Extravariable deklariert werden - dadurch kann nicht ohne Extravariable Ã¼berprÃ¼ft werden, ob es die 1. Runde ist
-			byte entscheidung = eingabeBenutzer(sc);														// Benutzerauswahl + ÃœberprÃ¼fung der gÃ¼ltigen Benutzereingabe 1 (streicheln), 2 (fÃ¼ttern) oder 3 (hauen)
-			Spiel.leerenKonsole();																		// Bildschirm vor Auswirkung leeren, damit bessere Lesbarkeit in der Konsole vorhanden ist
-			einzelneBegegnung.getReaktion(entscheidung); 													// Ausgabe der Reaktion der Begegnung auf Benutzereingabe
-			if(einzelneBegegnung.isLebensabzug(entscheidung)) meinSpiel.lebenVerringern();				// Wenn Benutzerauswahl schlecht war, dann Leben verringern
+			info.ausgeben(1,"Du setzt Deinen Weg fort. Aber - was ist das? Eine Begegnung. Du kannst sie "	// Nachteil bei foreach: Rundenindex müsste als Extravariable deklariert werden - dadurch kann nicht ohne Extravariable überprüft werden, ob es die 1. Runde ist
+					+ "nicht erkennen. Möchtest Du die Begegnung \n1) streicheln?\n2) füttern?\n"
+					+ "3) oder mit dem Stock hauen?");
 			
+			byte entscheidung = eingabeBenutzer(sc);													// Benutzerauswahl + Überprüfung der gültigen Benutzereingabe 1 (streicheln), 2 (füttern) oder 3 (hauen)
+			info.ausgeben(10,einzelneBegegnung.getReaktion(entscheidung)); 												// Ausgabe der Reaktion der Begegnung auf Benutzereingabe
+			if(einzelneBegegnung.isLebensabzug(entscheidung)) meinSpiel.lebenVerringern();				// Wenn Benutzerauswahl schlecht war, dann Leben verringern
+	
 			if(!meinSpiel.lebenVorhanden()) break;														// Vorzeitiger Abbruch, falls kein Leben mehr vorhanden
 		}
 		
-		meinSpiel.ausgebenNachrichtEnde();																// Ausgabe, ob man gewonnen oder verloren hat
+		if (meinSpiel.getLeben() == 0)
+			info.ausgeben(2,"Du hast es leider nicht aus dem Wald geschafft. Viel Glück beim nächsten Mal.");
+		else
+			info.ausgeben(2,"Der Wald lichtet sich. \nFroh am leben zu sein, setzt Du Deinen Weg fort."); // Ausgabe, ob man gewonnen oder verloren hat
 		
 		//----------------------------------------		
-	    // AUFRÃ„UMEN - HEAP LEEREN
+	    // AUFRÄUMEN - HEAP LEEREN
 		sc.close();
 		sc = null;
 		meinSpiel = null;
-		listeDB = null;
 		begegnungen = null;
 	}
 	
-	/*********************************************************************************	
-	* Um die Main-Methode nicht unnÃ¶tig aufzublÃ¤hen, wurden die Begegnungen in diese Methode
-	* extrahiert. ZurÃ¼ckgegeben wird eine Liste mit Begegnungen
-	* 
-	* Durch die Vorgabe der Parameter und UnterstÃ¼tzung der IDE, ist eine fehlerhafte Eingabe hier wesentlich schwieriger.
-	* Auch ist es bereits bei der Eingabe nicht mehr mÃ¶glich, falsche Datentypen beim Lebensabzug einzugeben. 
-	* Die Fehlermeldung wÃ¼rde direkt hier aufploppen, wo die Ursache ist und nicht spÃ¤ter bei der Verarbeitung.
-	*********************************************************************************/
-
-	// Gibt eine der Zufallsbegegnungen zurÃ¼ck
+	// Gibt eine der Zufallsbegegnungen zurück
 	private static Begegnung getZufallsBegegnung(List<Begegnung> listeDB) {
 		Random zufallszahl = new Random();
 		return listeDB.get(zufallszahl.nextInt(listeDB.size()));
 	}
 
 	/*********************************************************************************	
-	* Diese Methode habe ich nicht in die Klasse Spiel verschoben, da es lediglich um die ÃœberprÃ¼fung einer 
-	* korrekten Eingabe (1, 2 oder 3) geht und das keine spezielle Mechanik des Spiel-Objekts ist, sonder den 
-	* korrekten Ablauf in der Main-Methode sichert.
+	* Hier wurde die Ausgabe wie gehabt belassen
 	* *******************************************************************************/
 	
 	private static byte eingabeBenutzer(Scanner sc) throws IOException {
 
 		byte eingabe = 0;
-		boolean eingabeGueltig = false;									// fÃ¼r Errorhandling, dass Benutzer 1, 2 oder 3 eingibt
+		boolean eingabeGueltig = false;									// für Errorhandling, dass Benutzer 1, 2 oder 3 eingibt
 
 		// Eingabe des Benutzers + Errorhandling
-		while(!eingabeGueltig) {					// Solange keine gÃ¼ltige Eingabe vorhanden ist, soll die Eingabe wiederholt werden
-			try {									// ÃœberprÃ¼fe, ob Fehler gemacht wurde
-				eingabe = sc.nextByte();		// BenutzerEingabe 1, 2 oder 3
-				if (eingabe >=1 && eingabe <=3) {	// Falls Eingabe=Byte, dann Ã¼berprÃ¼fen, ob Wert zwischen 1-3
+		while(!eingabeGueltig) {					// Solange keine gültige Eingabe vorhanden ist, soll die Eingabe wiederholt werden
+			try {									// Überprüfe, ob Fehler gemacht wurde
+				eingabe = sc.nextByte();			// BenutzerEingabe 1, 2 oder 3
+				if (eingabe >=1 && eingabe <=3) {	// Falls Eingabe=Byte, dann überprüfen, ob Wert zwischen 1-3
 					eingabeGueltig = true;
 				} else {							// 		Wenn Wert nicht zwischen 1-3 Fehlermeldung und Wiederholung
 					Spiel.ausgebenNachrichtEingabefehler();

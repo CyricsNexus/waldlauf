@@ -1,17 +1,19 @@
 package deklarativ;
 
+import java.util.function.Consumer;
+
 /* Das Spiel selbst fungiert hier ebenfalls als Objekt mit eigenen Eigenschaften.
- * HÃ¤tte man das nicht weiterhin in der Main-Klasse als Eigenschaften lassen kÃ¶nnen? Prinzipiell ja.
+ * Hätte man das nicht weiterhin in der Main-Klasse als Eigenschaften lassen können? Prinzipiell ja.
  * Es ist einfach sauberer in der Objektorientierten Welt, in der wir alles als Objekte definieren. Und es wird
- * lesbarer, da wir immer angeben mÃ¼ssen, mit welchem Objekt etwas gemacht wird und welche Objekte sich
+ * lesbarer, da wir immer angeben müssen, mit welchem Objekt etwas gemacht wird und welche Objekte sich
  * gegenseitig bedingen.
  * 
  * Die Main-Methode soll streng genommen nur das Spiel starten. In unserem Fall belassen wir in der Main-Methode aber
  * auch die Algorithmik, da das Spiel so simpel ist - es gibt quasi nichts anderes als den einen Ablauf.
- * Nach meinem persÃ¶nlichen Ermessen wÃ¼rde es sich anfÃ¼hlen wie eine Schachtel zu kaufen, um eine kleinere Schachtel
- * reinzutun. Es wÃ¤re etwas anderes, wenn dieses Spiel eines von mehreren wÃ¤re, welches man im Waldlauf machen kann
- * (z.B. rasten, trainieren, etc.). In diesem Fall hÃ¤tte ich definitv die Klasse main als reine Startklasse genommen
- * und ggf. die anderen Parts sogar in eigene Packages sortiert, um diese modular hinzufÃ¼gen oder entfernen zu kÃ¶nnen.
+ * Nach meinem persönlichen Ermessen würde es sich anfühlen wie eine Schachtel zu kaufen, um eine kleinere Schachtel
+ * reinzutun. Es wäre etwas anderes, wenn dieses Spiel eines von mehreren wäre, welches man im Waldlauf machen kann
+ * (z.B. rasten, trainieren, etc.). In diesem Fall hätte ich definitv die Klasse main als reine Startklasse genommen
+ * und ggf. die anderen Parts sogar in eigene Packages sortiert, um diese modular hinzufügen oder entfernen zu können.
  */
 
 public class Spiel {
@@ -24,12 +26,14 @@ public class Spiel {
 		this.anzahlRunden = anzahlRunden;
 	}
 	
+	
+	
 	// Benutzer hat falsche Entscheidung getroffen, das Leben wird verringert
 	public void lebenVerringern() {
 		leben--;
 	}
 	
-	// ÃœberprÃ¼fung, ob Spieler noch Leben hat
+	// Überprüfung, ob Spieler noch Leben hat
 	public boolean lebenVorhanden() {
 		return (leben > 0) ? true : false; 
 	}
@@ -45,41 +49,11 @@ public class Spiel {
 	/*******************************************************
 	 * METHODEN, DIE NUR NACHRICHTEN AUSGEBEN
 	********************************************************/
-	// Diese Ausgaben sind Klassenmethoden, da sie sich nicht auf ein konkretes Spiel beziehen, sondern
-	// generell fÃ¼r jedes Spiel gelten. Sie sind nicht abhÃ¤ngig von der aktuellen Runde oder restlichen Leben, die
-	// der Spieler hat.
-	// Ausnahme ist ausgebenNachrichtEnde() - hier Ã¤ndert sich die Nachricht, je nachdem ob der Benutzer leben > 0 hat.
-	
-	// Ausgabe Spielbeginn
-	public static void ausgebenIntro() {
-		System.out.println("Du bist in einem Wald und hast einen Wanderstab sowie einen Rucksack voll mit Eier-Tomaten-Gurken-Sandwiches. \nEs ist sehr dunkel und du kannst kaum die Hand vor Deinen Augen sehen.");
-	}
-	
-	// Ausgabe jede neue Runde
-	public static void ausgebenFolgebegegnung() {
-		System.out.println("\nDu setzt Deinen Weg fort. Aber - was ist das? Eine Begegnung. Du kannst sie nicht erkennen. MÃ¶chtest Du die Begegnung "
-				+ "\n1) streicheln?\n2) fÃ¼ttern?\n3) oder mit dem Stock hauen?");
-	}
-
-	// Ausgabe Spielende ob gewonnen oder verloren
-	public void ausgebenNachrichtEnde() {
-		if (leben == 0)
-			System.out.println("\n\nDu hast es leider nicht aus dem Wald geschafft. Viel GlÃ¼ck beim nÃ¤chsten Mal.");
-		else
-			System.out.println("\n\nDer Wald lichtet sich. \nFroh am leben zu sein, setzt Du Deinen Weg fort.");
-	}
 	
 	// Ausgabe nach fehlerhafter Eingabe
 	public static void ausgebenNachrichtEingabefehler() {
-		System.out.print("\nEingabe ungÃ¼ltig. MÃ¶chtest Du die Begegnung: \n"
-				+ "\n1) zu streicheln?\n2) zu fÃ¼ttern?\n3) mit dem Stock zu hauen?");
+		System.out.print("\nEingabe ungültig. Möchtest Du die Begegnung: \n"
+				+ "\n1) zu streicheln?\n2) zu füttern?\n3) mit dem Stock zu hauen?");
 	}
-	
-	// Macht ZeilenumbrÃ¼che, dass es nach Neuer Seite aussieht
-	public static void leerenKonsole() {
-		for(int i=1; i<10;i++)				// Screen durch 10 ZeilenumbrÃ¼che "leeren"
-			System.out.println("\n");
-	}
-	
 
 }
