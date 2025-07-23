@@ -10,7 +10,7 @@ import java.util.Scanner;
  *  anzahlBegegnungenmax : int								| Wieviele Begegnungen in diesem Spiel vorhanden sind
  *  leben : int	= 3											| Anzahl der Leben zu Beginn
  *  runde : int 												| die aktuelle Runde
- *  maxRunde : int = 10										| die Anzahl der zu bewältigen Runden, bis das Spiel gewonnen ist
+ *  maxRunde : int = 10										| die Anzahl der zu bewÃ¤ltigen Runden, bis das Spiel gewonnen ist
  ******************************************************/
 /*******************************************************
  * METHODEN
@@ -22,35 +22,35 @@ import java.util.Scanner;
  *							| 1. Zufallsbegegnung erfassen
  *							| 2. Benutzereingabe erhalten
  *							| 3. Handlungsergebnis mitteilen
- *							| 4. Zurückgeben, ob 1 oder 0 Leben abgezogen werden
- *  							| Benötigt Parameter
- *  							|    o anzahlBegegnungenmax für Zufallsbegegnungen
- *  							|	 o begegnung, um die Auswertung durchzuführen 
- *   						|    o ersteRunde für Ãœberprüfung, ob Nachricht für Folgerunde ausgegeben werden soll oder nicht
+ *							| 4. ZurÃ¼ckgeben, ob 1 oder 0 Leben abgezogen werden
+ *  							| BenÃ¶tigt Parameter
+ *  							|    o anzahlBegegnungenmax fÃ¼r Zufallsbegegnungen
+ *  							|	 o begegnung, um die Auswertung durchzufÃ¼hren 
+ *   						|    o ersteRunde fÃ¼r ÃƒÅ“berprÃ¼fung, ob Nachricht fÃ¼r Folgerunde ausgegeben werden soll oder nicht
  *   
  *  - initBegegnung(int anzahlBegegnungenmax) : String[][] 
- *							| Füllt begegnungen[][] mit den literalen Begegnungen / Werten
- * 							| Benötigt Parameter anzahlBegegnungenmax für Arrayerstellung
+ *							| FÃ¼llt begegnungen[][] mit den literalen Begegnungen / Werten
+ * 							| BenÃ¶tigt Parameter anzahlBegegnungenmax fÃ¼r Arrayerstellung
  * 
  * - erstelleBegegnung(int index, String[][] begegnung, String fuetternReaktion, String streichelnReaktion, String kloppenReation, 
  * 									String punktAbzugFuettern, String punktAbzugStreicheln, String punktAbzugKloppen)
- *							| füllt in der Methode initBegegnung() aus den Literalen den Array begegnung[][] und hilft durch Parameter gegen Fehleingaben 
+ *							| fÃ¼llt in der Methode initBegegnung() aus den Literalen den Array begegnung[][] und hilft durch Parameter gegen Fehleingaben 
  *
  * - auswertungLebensabzug(String[][] begegnung, int zufallszahl,  byte eingabe)
- * 							| gibt eine 1 zurück, wenn Leben abgezogen werden soll oder 0, wenn kein Leben abgezogen werden soll
+ * 							| gibt eine 1 zurÃ¼ck, wenn Leben abgezogen werden soll oder 0, wenn kein Leben abgezogen werden soll
  * 
  * - eingabeBenutzer() : byte 
- *  							| gibt zurück, ob der Spieler 1) Füttern, 2) Streicheln oder 3) Kloppen eingegeben hat und fängt fehlerhafte Eingaben ab
+ *  							| gibt zurÃ¼ck, ob der Spieler 1) FÃ¼ttern, 2) Streicheln oder 3) Kloppen eingegeben hat und fÃ¤ngt fehlerhafte Eingaben ab
  *  
- *   METHODEN FÃœR NACHRTICHTEN-AUSGABEN
+ *   METHODEN FÃƒÅ“R NACHRTICHTEN-AUSGABEN
 
- *   - ausgebenIntro() : void						| Ausgabe zum Spielbeginn, Erklärung
+ *   - ausgebenIntro() : void						| Ausgabe zum Spielbeginn, ErklÃ¤rung
  *   - ausgebenFolgebegegnung() : void				| Ausgabe zur neuen Runde
  *   - ausgebenNachrichtEntscheidung(String[][] begegnung, int zufallszahl,  byte eingabe) : void
  *   												| Ausgabe, welche Begegnung es war und was die Entscheidung gemacht hat
  *   - ausgebenNachrichtEnde(leben) : void			| Ausgabe ob gewonnen oder verloren
  *   - ausgebenNachrichtEingabefehler() : void		| Ausgabe Fehlermeldung, wenn Benutzer nicht 1, 2 oder 3 eingegeben hat
- *   - leerenKonsole() : void						| "leert" die Konsole durch Zeilenumbrüche
+ *   - leerenKonsole() : void						| "leert" die Konsole durch ZeilenumbrÃ¼che
  ******************************************************/
 
 public class waldlauf {
@@ -84,7 +84,7 @@ public class waldlauf {
 		
 		ausgebenNachrichtEnde(leben); 				// Ausgabe Nachricht, ob Spieler gewonnen oder verloren hat
 		
-		// Aufräumen
+		// AufrÃ¤umen
 		sc.close();
 		sc = null;
 
@@ -94,8 +94,8 @@ public class waldlauf {
 	private static int durchlaufRunde(int anzahlBegegnungenmax, String[][] begegnung, boolean ersteRunde, Scanner sc ) throws IOException {
 
 		Random random = new Random();									// Instanziierung Zufallszahl
-		int zufallszahl = random.nextInt(anzahlBegegnungenmax);			// Zufällige Auswahl der Begegnung
-		if (!ersteRunde) ausgebenFolgebegegnung();						// Anfangstext für 2. bis letzte Runde
+		int zufallszahl = random.nextInt(anzahlBegegnungenmax);			// ZufÃ¤llige Auswahl der Begegnung
+		if (!ersteRunde) ausgebenFolgebegegnung();						// Anfangstext fÃ¼r 2. bis letzte Runde
 		byte eingabe = eingabeBenutzer(sc);									// Handlung Benutzer + Sicherstellung, dass Eingabe vom Benutzer 1, 2 oder 3
 		leerenKonsole();													// Bildschirm vor Auswirkung leeren
 		ausgebenNachrichtEntscheidung(begegnung, zufallszahl, eingabe);
@@ -103,7 +103,7 @@ public class waldlauf {
 		return auswertungLebensabzug(begegnung, zufallszahl, eingabe); 	// Leben abziehen
 	}
 	
-	// Daten für den Begegnungsarray
+	// Daten fÃ¼r den Begegnungsarray
 	private static String[][] initBegegnung(int anzahlBegegnungenmax){
 		
 		String begegnung[][] = new String[anzahlBegegnungenmax][6];		// Array mit Begegnungen
@@ -112,32 +112,32 @@ public class waldlauf {
 		* ERSTELLUNG DER BEGEGNUNGEN
 		* ****************************************************************************************
 		* Struktur der Methode erstelleBegegnung: Index der Begegnung, Begegnungsarray, 
-		* 				Ausgabe Füttern,
+		* 				Ausgabe FÃ¼ttern,
 		* 				Ausgabe Streicheln,
 		* 				Ausgabe Hauen,
-		* 				Lebensabzug Füttern, Lebensabzug Streicheln, Lebensabzug Hauen 
+		* 				Lebensabzug FÃ¼ttern, Lebensabzug Streicheln, Lebensabzug Hauen 
 		*/
 		
 		//Der Hulk
 		begegnung = erstelleBegegnung(0, begegnung, 
-				"Der Hulk freut sich über das Essen und zieht weiter.", 
-				"Der Hulk erwiedert deine Zärtlichkeit und drückt dich mal ganz dolle - ohoh! (-1 Leben).", 
+				"Der Hulk freut sich Ã¼ber das Essen und zieht weiter.", 
+				"Der Hulk erwiedert deine ZÃ¤rtlichkeit und drÃ¼ckt dich mal ganz dolle - ohoh! (-1 Leben).", 
 				"Der HULK SMASH!(-1 Leben).", 
 				"0", "0", "1");
 		
 
 		//Dr. Snuggles
 		begegnung = erstelleBegegnung(1, begegnung, 
-				"Dr. Snuggles bedankt sich höflich für das Essen und hüpft auf seinem Pogo-Schirm weiter.", 
-				"Dr. Snuggles drückt Dir zum Abschied freundlich die Hand und hüpft auf seinem Pogo-Schirm weiter.", 
-				"Na, das ist aber nicht nett, Dr. Snuggles zu verhauen. Die Tiere des Waldes sind erbost und \nvermoppern dich dafür gründlich. (-1 Leben).", 
+				"Dr. Snuggles bedankt sich hÃ¶flich fÃ¼r das Essen und hÃ¼pft auf seinem Pogo-Schirm weiter.", 
+				"Dr. Snuggles drÃ¼ckt Dir zum Abschied freundlich die Hand und hÃ¼pft auf seinem Pogo-Schirm weiter.", 
+				"Na, das ist aber nicht nett, Dr. Snuggles zu verhauen. Die Tiere des Waldes sind erbost und \nvermoppern dich dafÃ¼r grÃ¼ndlich. (-1 Leben).", 
 				"0", "0", "1");
 
 		
 		//Batman
 		begegnung = erstelleBegegnung(2, begegnung, 
-				"Batman freut sich sehr für das Essen. \"Ein gutgenährter Magen  ist die Grundvoraussetzung für einen \ngut genährten Geist. Vergiss das niemals, Robin!\" Bevor du etwas sagen kannst, ist er schon entfleucht.", 
-				"Batman nickt dir aufmunternd zu. \"Freundlichkeit gegenüber Unbekannten kann nie schaden. Wie sagte \nnoch einst ein weiser Mann aus dem gebildeten Orient...\" Du wachst nach einiger Zeit benommen auf und \nsetzt Deinen Weg fort.", 
+				"Batman freut sich sehr fÃ¼r das Essen. \"Ein gutgenÃ¤hrter Magen  ist die Grundvoraussetzung fÃ¼r einen \ngut genÃ¤hrten Geist. Vergiss das niemals, Robin!\" Bevor du etwas sagen kannst, ist er schon entfleucht.", 
+				"Batman nickt dir aufmunternd zu. \"Freundlichkeit gegenÃ¼ber Unbekannten kann nie schaden. Wie sagte \nnoch einst ein weiser Mann aus dem gebildeten Orient...\" Du wachst nach einiger Zeit benommen auf und \nsetzt Deinen Weg fort.", 
 				"Oh nein! Du hast Batman gehauen. Heiliger Konterschlag! (-1 Leben)", 
 				"0", "0", "1");
 
@@ -145,7 +145,7 @@ public class waldlauf {
 		begegnung = erstelleBegegnung(3, begegnung, 
 				"Magst Du auch Popcorn? Dann komm mit! Bei uns gibt es ganz viel davon!\" Der gruselige Clown gibt \nDir einen roten Ballon und zieht dich in den Gulli. (-1 Leben)", 
 				"Komm mit! Mit uns kannst Du fliiiieeegeeeen!\" Und schon bist Du im Gulli (-1 Leben)", 
-				"Du knüppelst auf Pennywise drauf. Du magst eh keine Ballons.", 
+				"Du knÃ¼ppelst auf Pennywise drauf. Du magst eh keine Ballons.", 
 				"1", "1", "0");
 		
 		//Frantzen
@@ -157,15 +157,15 @@ public class waldlauf {
 
 		//Das Lama
 		begegnung = erstelleBegegnung(5, begegnung, 
-				"Das Lama macht \"Bääää!\" *Mampf*", 
-				"Das Lama mach \"Bääääh?\"", 
+				"Das Lama macht \"BÃ¤Ã¤Ã¤Ã¤!\" *Mampf*", 
+				"Das Lama mach \"BÃ¤Ã¤Ã¤Ã¤h?\"", 
 				"Das Lama spuckt. (-1 Leben) \"", 
 				"0", "0", "1");
 		
 		//Der Baum
 		begegnung = erstelleBegegnung(5, begegnung, 
 				"Der Baum ist unbeeindruckt vom Essen.", 
-				"Der Baum streichelt nicht zurück.", 
+				"Der Baum streichelt nicht zurÃ¼ck.", 
 				"Der Baum kippt um. Bumm. (-1 Leben)", 
 				"0", "0", "1");
 
@@ -176,17 +176,11 @@ public class waldlauf {
 				"Der T-Rex rennt weinend weg.", 
 				"1", "1", "0");
 		
-		//T-Rex
-		begegnung = erstelleBegegnung(5, begegnung, 
-				"Der T-Rex guckt hungrig. Du bist das Essen. (-1 Leben)", 
-				"Der T-Rex mag es, gestreichelt zu werden. Dann verschlingt er Dich. (-1 Leben)", 
-				"Der T-Rex rennt weinend weg.", 
-				"1", "1", "0");
 
 		return begegnung;
 	}
 	
-	// Füllt den Array mit den Daten - wird von initBegegnung bei jedem Tupel aufgerufen
+	// FÃ¼llt den Array mit den Daten - wird von initBegegnung bei jedem Tupel aufgerufen
 	private static String [][] erstelleBegegnung(int index, String[][] begegnung, String fuetternReaktion, String streichelnReaktion, String kloppenReation, String punktAbzugFuettern, String punktAbzugStreicheln, String punktAbzugKloppen) {
 		begegnung[index][0] = fuetternReaktion; 
 		begegnung[index][1] = streichelnReaktion;
@@ -197,23 +191,23 @@ public class waldlauf {
 		return begegnung;
 	}
 	
-	// Gibt den Wert (0 oder 1) zurück, der das Leben abzieht
+	// Gibt den Wert (0 oder 1) zurÃ¼ck, der das Leben abzieht
 	private static int auswertungLebensabzug(String[][] begegnung, int zufallszahl,  byte eingabe) {
 		return  Integer.parseInt(begegnung[zufallszahl][eingabe+2]);
 	}
 	
 	// Eingabe des Benutzers inkl. Fehlerbehandlung, wenn keine 1, 2 oder 3 eingegeben wurde
-	// Methode wird nur bei gültigen Wert verlassen
+	// Methode wird nur bei gÃ¼ltigen Wert verlassen
 	private static byte eingabeBenutzer(Scanner sc) throws IOException {
 
 		byte eingabe = 0;
-		boolean eingabeGueltig = false;									// für Errorhandling, dass Benutzer 1, 2 oder 3 eingibt
+		boolean eingabeGueltig = false;									// fÃ¼r Errorhandling, dass Benutzer 1, 2 oder 3 eingibt
 
 		// Eingabe des Benutzers + Errorhandling
-		while(!eingabeGueltig) {					// Solange keine gültige Eingabe vorhanden ist, soll die Eingabe wiederholt werden
-			try {									// Ãœberprüfe, ob Fehler gemacht wurde
+		while(!eingabeGueltig) {					// Solange keine gÃ¼ltige Eingabe vorhanden ist, soll die Eingabe wiederholt werden
+			try {									// ÃƒÅ“berprÃ¼fe, ob Fehler gemacht wurde
 				eingabe = sc.nextByte();		// BenutzerEingabe 1, 2 oder 3
-				if (eingabe >=1 && eingabe <=3) {	// Falls Eingabe=Byte, dann überprüfen, ob Wert zwischen 1-3
+				if (eingabe >=1 && eingabe <=3) {	// Falls Eingabe=Byte, dann Ã¼berprÃ¼fen, ob Wert zwischen 1-3
 					eingabeGueltig = true;
 				} else {							// 		Wenn Wert nicht zwischen 1-3 Fehlermeldung und Wiederholung
 					ausgebenNachrichtEingabefehler();
@@ -233,13 +227,13 @@ public class waldlauf {
 
 	// Ausgabe Spielbeginn
 	private static void ausgebenIntro() {
-		System.out.println("Du bist in einem Wald und hast einen Wanderstab sowie einen Rucksack voll mit Eier-Tomaten-Gurken-Sandwiches. \nEs ist sehr dunkel und du kannst kaum die Hand vor Deinen Augen sehen, als Dir plötzlich etwas begegnet. \nDu hast keine Ahnung, wer oder was es ist. Möchtest du es:\n\n1) Füttern?\n2) Streicheln?\n3) Mit dem Stock hauen?");
+		System.out.println("Du bist in einem Wald und hast einen Wanderstab sowie einen Rucksack voll mit Eier-Tomaten-Gurken-Sandwiches. \nEs ist sehr dunkel und du kannst kaum die Hand vor Deinen Augen sehen, als Dir plÃ¶tzlich etwas begegnet. \nDu hast keine Ahnung, wer oder was es ist. MÃ¶chtest du es:\n\n1) FÃ¼ttern?\n2) Streicheln?\n3) Mit dem Stock hauen?");
 	}
 	
 	// Ausgabe jede neue Runde
 	private static void ausgebenFolgebegegnung() {
-		System.out.println("\nDu setzt Deinen Weg fort. Aber - was ist das? Eine weitere Begegnung. Du entschlieÃŸt sich die Begegnung: "
-				+ "\n1) zu füttern?\n2) zu streicheln?\n3) mit dem Stock zu hauen?");
+		System.out.println("\nDu setzt Deinen Weg fort. Aber - was ist das? Eine weitere Begegnung. Du entschlieÃƒÅ¸t sich die Begegnung: "
+				+ "\n1) zu fÃ¼ttern?\n2) zu streicheln?\n3) mit dem Stock zu hauen?");
 	}
 	
 	// Ausgabe Auswirkung nach Benutzereingabe
@@ -250,20 +244,20 @@ public class waldlauf {
 	// Ausgabe Spielende ob gewonnen oder verloren
 	private static void ausgebenNachrichtEnde(int leben) {
 		if (leben == 0)
-			System.out.println("\n\nDu hast es leider nicht aus dem Wald geschafft. Viel Glück beim nächsten Mal.");
+			System.out.println("\n\nDu hast es leider nicht aus dem Wald geschafft. Viel GlÃ¼ck beim nÃ¤chsten Mal.");
 		else
 			System.out.println("\n\nDer Wald lichtet sich. \nFroh am leben zu sein, setzt Du Deinen Weg fort.");
 	}
 	
 	// Ausgabe nach fehlerhafter Eingabe
 	private static void ausgebenNachrichtEingabefehler() {
-		System.out.print("\nEingabe ungültig. Möchtest Du die Begegnung: \n"
-				+ "1) füttern?\n2) streicheln?\n3) mit dem Stock hauen?");
+		System.out.print("\nEingabe ungÃ¼ltig. MÃ¶chtest Du die Begegnung: \n"
+				+ "1) fÃ¼ttern?\n2) streicheln?\n3) mit dem Stock hauen?");
 	}
 	
-	// Macht Zeilenumbrüche, dass es nach Neuer Seite aussieht
+	// Macht ZeilenumbrÃ¼che, dass es nach Neuer Seite aussieht
 	private static void leerenKonsole() {
-		for(int i=1; i<10;i++)				// Screen durch 10 Zeilenumbrüche "leeren"
+		for(int i=1; i<10;i++)				// Screen durch 10 ZeilenumbrÃ¼che "leeren"
 			System.out.println("\n");
 	}
 }
