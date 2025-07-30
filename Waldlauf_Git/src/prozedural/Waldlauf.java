@@ -53,7 +53,7 @@ import java.util.Scanner;
  *   - leerenKonsole() : void						| "leert" die Konsole durch Zeilenumbrüche
  ******************************************************/
 
-public class waldlauf {
+public class Waldlauf {
 
 	// Hauptmethode mit Rundenschleife
 	public static void main(String[] args) throws IOException{

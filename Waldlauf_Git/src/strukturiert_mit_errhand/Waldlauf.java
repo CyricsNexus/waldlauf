@@ -12,7 +12,7 @@ import java.util.Scanner;
  *  runde : int 											| die aktuelle Runde
  *  maxRunde : int = 10										| die Anzahl der zu bewältigen Runden, bis das Spiel gewonnen ist
  ******************************************************/
-public class waldlauf {
+public class Waldlauf {
 
 	public static void main(String[] args) throws IOException {
 		/******************************************************************************************
